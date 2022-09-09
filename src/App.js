@@ -4,7 +4,7 @@ import { GlobalStyle } from "./assets/css/GlobalStyle";
 
 import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
-import TransactionsHistory from "./pages/transactions-history/TransactionsHistory";
+import Home from "./pages/home/Home";
 
 import PrivatePage from "./routes/private-page/PrivatePage";
 
@@ -22,7 +22,7 @@ export default function App() {
                 path="/home" 
                 element={
                     <PrivatePage>
-                        <TransactionsHistory />
+                        <Home />
                     </PrivatePage>
                 } />
 
