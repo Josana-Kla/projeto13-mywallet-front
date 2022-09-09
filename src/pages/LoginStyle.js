@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 const Background = styled.div`
     height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const Content = styled.div`
-    padding-top: 68px;
-
     display: flex;
     flex-direction: column;
     align-items: center;

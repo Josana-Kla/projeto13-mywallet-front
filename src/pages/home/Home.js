@@ -1,4 +1,6 @@
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 export default function Home() {
     return (
@@ -12,6 +14,22 @@ export default function Home() {
                 //TODO: Se a quantidade de coisas dentro de histórico maior que 0
                 { 1===1 ? <TransactionsHistory /> : (<p>Não há registros de entrada ou saída</p>)}
             </div>
+
+            <span>
+                <Link to="/cash-in">
+                    <button>
+                        <IoMdAddCircleOutline />
+                        <h2>Nova entrada</h2>
+                    </button>
+                </Link>
+
+                <Link to="/cash-out">
+                    <button>
+                        <IoMdRemoveCircleOutline />
+                        <h2>Nova saída</h2>
+                    </button>
+                </Link>
+            </span>
         </div>
     )
 }
