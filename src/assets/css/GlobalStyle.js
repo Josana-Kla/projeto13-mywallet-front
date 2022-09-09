@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
-        font: inherit;
         vertical-align: baseline;
     }
 
@@ -36,10 +35,8 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         line-height: 1;
-        background-color: #E5E5E5;
-        
-        font-family: 'Lexend Deca', sans-serif;
-        font-weight: 400;
+
+        background-color: #8C11BE;
     }
 
     ol, ul {
@@ -69,7 +66,6 @@ const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
-        color: initial;
     }
 `
 

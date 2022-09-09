@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ThreeDots } from  'react-loader-spinner';
 
 import { signIn } from "../../services/api/axios";
+import { Background, Content, LoginForm } from "../LoginStyle";
 
 export default function SignIn() {
     const [ email, setEmail ] = useState("");
@@ -39,10 +40,10 @@ export default function SignIn() {
     };
 
     return (
-        <div>
-            <div>
+        <Background>
+            <Content>
                 <h1>MyWallet</h1>
-                <form onSubmit={handleForm}>
+                <LoginForm onSubmit={handleForm}>
                     <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required disabled={loading} />
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Senha" pattern=".{8,}" title="Oito ou mais caracteres" required disabled={loading} />
                     {loading ? (
@@ -52,9 +53,10 @@ export default function SignIn() {
                     ) : (
                         <button type="submit">Entrar</button>
                     )}
-                </form>
+                </LoginForm>
+                
                 <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
-            </div>
-        </div>
+            </Content>
+        </Background>
     )
 }
