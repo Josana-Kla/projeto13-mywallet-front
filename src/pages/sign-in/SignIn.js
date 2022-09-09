@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ThreeDots } from  'react-loader-spinner';
 
 import { signIn } from "../../services/api/axios";
+
 import { Background, Content, LoginForm } from "../LoginStyle";
 
 export default function SignIn() {
@@ -16,7 +17,7 @@ export default function SignIn() {
         const body = {
             email: email,
             password: password
-        }
+        };
 
         setLoading(true);
 
@@ -54,7 +55,7 @@ export default function SignIn() {
                         <button type="submit">Entrar</button>
                     )}
                 </LoginForm>
-                
+
                 <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
             </Content>
         </Background>
