@@ -1,6 +1,8 @@
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getHistory } from "../../services/api/axios";
 
 export default function Home() {
     //TODO: Se a quantidade de coisas dentro de histórico maior que 0
@@ -35,19 +37,35 @@ export default function Home() {
 }
 
 function TransactionsHistory() {
+    const [ cashIn, setCashIn ] = useState([]);
+    const [ cashOut, setCashOut ] = useState([]);
+
+    useEffect(() => {
+        getHistory()
+        .then((response) => {
+            setCashIn(response.data.filter((item) => item.type === "cash_in"));
+            setCashOut(response.data.filter((item) => item.type === "cash_out")); 
+        })
+        .catch(() => console.log("error"));
+    }, []);
+
     return (
         <div>
             <div>
-                <span>
-                    <p>30/11 </p>
-                    <p>Almoço mãe</p>
-                    <p>39,90</p>
-                </span>
-                <span>
-                    <p>30/11 </p>
-                    <p>Almoço mãe</p>
-                    <p>39,90</p>
-                </span>
+                {cashIn.map((item, index) => (
+                    <span key={index}>
+                        <p>{item.date} </p>
+                        <p>{item.description}</p>
+                        <p>{item.value}</p>
+                    </span>
+                ))}
+                {cashOut.map((item, index) => (
+                    <span key={index}>
+                        <p>{item.date} </p>
+                        <p>{item.description}</p>
+                        <p>{item.value}</p>
+                    </span>
+                ))}
             </div>
 
             <span>

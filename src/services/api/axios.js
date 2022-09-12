@@ -37,4 +37,10 @@ function addCashOut(body) {
   return promise;
 }
 
-export { signUp, signIn, addCashIn, addCashOut }
+function getHistory() {
+  const config = getLocalToken();
+  const promise = axios.get(`${BASE_URL}/home`, config);
+  return promise;
+}
+
+export { signUp, signIn, addCashIn, addCashOut, getHistory }
