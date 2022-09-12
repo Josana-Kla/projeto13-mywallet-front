@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ThreeDots } from  'react-loader-spinner';
 
 import { signIn } from "../../services/api/axios";
+import { AuthContext } from "../../contexts/Auth";
 
 import { Background, Content, LoginForm } from "../LoginStyle";
 
@@ -10,6 +11,8 @@ export default function SignIn() {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ loading, setLoading ] = useState(false);
+
+    const { /* authenticated, setUser,  */login } = useContext(AuthContext);
 
     function handleForm(event) {
         event.preventDefault();
@@ -23,13 +26,15 @@ export default function SignIn() {
 
         signIn(body)
         .then((res) => {
+            login(res.data);
             console.log(res);
             
             console.log("sucesso");
+
             })
         .catch((error) => {
             alert("error");
-            console.log(error);
+            console.log(error.message);
             setLoading(false);
             resetForm();
         });

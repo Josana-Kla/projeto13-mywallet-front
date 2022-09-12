@@ -3,6 +3,7 @@ import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export default function Home() {
+    //TODO: Se a quantidade de coisas dentro de histórico maior que 0
     return (
         <div>
             <span>
@@ -11,7 +12,6 @@ export default function Home() {
             </span>
 
             <div>
-                //TODO: Se a quantidade de coisas dentro de histórico maior que 0
                 { 1===1 ? <TransactionsHistory /> : (<p>Não há registros de entrada ou saída</p>)}
             </div>
 
