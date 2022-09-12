@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addCashOut } from "../../services/api/axios";
+import { FormCash, Main } from "../CashStyle";
 
 export default function CashOut() {
     const navigate = useNavigate();
@@ -30,13 +31,13 @@ export default function CashOut() {
     }
 
     return (
-        <div>
+        <Main>
             <h1>Nova saída</h1>
-            <form onSubmit={handleForm}>
+            <FormCash onSubmit={handleForm}>
                 <input type="number" value={value} onChange={e => setValue(e.target.value)} placeholder="Valor" min="0" pattern="^R\$([1-9]\d{0,2}((\.\d{3})*|\d*))(\,\d{2})?$" required />
                 <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder="Descrição" pattern=".{2,}" title="Dois ou mais caracteres" required />
                 <button>Salvar saída</button>
-            </form>
-        </div>
+            </FormCash>
+        </Main>
     )
 }

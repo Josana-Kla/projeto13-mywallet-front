@@ -18,7 +18,6 @@ export default function Home() {
             setCashOut(response.data.filter((item) => item.type === "cash_out"));
             response.data.forEach((item) => {
                 const userName = item.name;
-                console.log(userName)
                 setUser(userName);
             });
         })

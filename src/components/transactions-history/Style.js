@@ -38,8 +38,9 @@ const LineTransaction = styled.span`
 `
 
 const Total = styled.div`
-    background-color: aliceblue;
     display: flex;
+
+    margin-top: 10px;
 
     p:nth-child(1) {
         color: #000000;
