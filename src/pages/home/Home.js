@@ -3,6 +3,8 @@ import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getHistory } from "../../services/api/axios";
+import TransactionsHistory from "../../components/transactions-history/TransactionsHistory";
+import { Main, ToTransactionsPage, TransactionsList, WelcomeUser } from "./Style";
 
 export default function Home() {
     const [ user, setUser ] = useState("");
@@ -24,74 +26,33 @@ export default function Home() {
     }, []);
 
     return (
-        <div>
-            <span>
+        <Main>
+            <WelcomeUser>
                 <h1>Olá, {user}</h1>
-                <RiLogoutBoxRLine />
-            </span>
+                <RiLogoutBoxRLine size="24px" />
+            </WelcomeUser>
 
-            <div>
-                { (cashIn.length > 0 || cashOut.length > 0) ? <TransactionsHistory cashIn={cashIn} cashOut={cashOut} /> : (<p>Não há registros de entrada ou saída</p>)}
-            </div>
+            <TransactionsList>
+                { (cashIn.length > 0 || cashOut.length > 0) ? <TransactionsHistory cashIn={cashIn} cashOut={cashOut} /> : (
+                    <p>Não há registros de entrada ou saída</p>
+                )}
+            </TransactionsList>
 
-            <span>
+            <ToTransactionsPage>
                 <Link to="/cash-in">
                     <button>
-                        <IoMdAddCircleOutline />
+                        <IoMdAddCircleOutline size="25px" />
                         <h2>Nova entrada</h2>
                     </button>
                 </Link>
 
                 <Link to="/cash-out">
                     <button>
-                        <IoMdRemoveCircleOutline />
+                        <IoMdRemoveCircleOutline size="25px" />
                         <h2>Nova saída</h2>
                     </button>
                 </Link>
-            </span>
-        </div>
-    )
-}
-
-function TransactionsHistory( { cashIn, cashOut } ) {
-    function total() {
-        const eachCashIn = cashIn.map((item) => Number(item.value)); 
-        let countCashIn = 0;
-        console.log(countCashIn)
-        eachCashIn.forEach((x) => { console.log( countCashIn += x)});
-
-        const eachCashOut = cashOut.map((item) => Number(item.value)); 
-        let countCashOut = 0;
-        eachCashOut.forEach((x) => { console.log( countCashOut += x)});
-        
-        const totalCashInAndOut = (countCashIn - countCashOut).toFixed(2);
-        console.log(totalCashInAndOut);
-        return totalCashInAndOut;
-    }
-
-    return (
-        <div>
-            <div>
-                {cashIn.map((item, index) => (
-                    <span key={index}>
-                        <p>{item.date} </p>
-                        <p>{item.description}</p>
-                        <p>{item.value}</p>
-                    </span>
-                ))}
-                {cashOut.map((item, index) => (
-                    <span key={index}>
-                        <p>{item.date} </p>
-                        <p>{item.description}</p>
-                        <p>{item.value}</p>
-                    </span>
-                ))}
-            </div>
-
-            <span>
-                <p>SALDO</p>
-                <p>{total()}</p>
-            </span>
-        </div>
+            </ToTransactionsPage>
+        </Main>
     )
 }
