@@ -5,16 +5,33 @@ import { useEffect, useState } from "react";
 import { getHistory } from "../../services/api/axios";
 
 export default function Home() {
-    //TODO: Se a quantidade de coisas dentro de histórico maior que 0 - passar a funcao get para aqui de transacoes e mandar via props
+    const [ user, setUser ] = useState("");
+    const [ cashIn, setCashIn ] = useState([]);
+    const [ cashOut, setCashOut ] = useState([]);
+
+    useEffect(() => {
+        getHistory()
+        .then((response) => {
+            setCashIn(response.data.filter((item) => item.type === "cash_in"));
+            setCashOut(response.data.filter((item) => item.type === "cash_out"));
+            response.data.forEach((item) => {
+                const userName = item.name;
+                console.log(userName)
+                setUser(userName);
+            });
+        })
+        .catch((error) => console.log(error));
+    }, []);
+
     return (
         <div>
             <span>
-                <h1>Olá, Fulano</h1>
+                <h1>Olá, {user}</h1>
                 <RiLogoutBoxRLine />
             </span>
 
             <div>
-                { 1===1 ? <TransactionsHistory /> : (<p>Não há registros de entrada ou saída</p>)}
+                { (cashIn.length > 0 || cashOut.length > 0) ? <TransactionsHistory cashIn={cashIn} cashOut={cashOut} /> : (<p>Não há registros de entrada ou saída</p>)}
             </div>
 
             <span>
@@ -36,29 +53,18 @@ export default function Home() {
     )
 }
 
-function TransactionsHistory() {
-    const [ cashIn, setCashIn ] = useState([]);
-    const [ cashOut, setCashOut ] = useState([]);
-
-    useEffect(() => {
-        getHistory()
-        .then((response) => {
-            setCashIn(response.data.filter((item) => item.type === "cash_in"));
-            setCashOut(response.data.filter((item) => item.type === "cash_out")); 
-        })
-        .catch(() => console.log("error"));
-    }, []);
-
+function TransactionsHistory( { cashIn, cashOut } ) {
     function total() {
         const eachCashIn = cashIn.map((item) => Number(item.value)); 
         let countCashIn = 0;
+        console.log(countCashIn)
         eachCashIn.forEach((x) => { console.log( countCashIn += x)});
 
         const eachCashOut = cashOut.map((item) => Number(item.value)); 
         let countCashOut = 0;
         eachCashOut.forEach((x) => { console.log( countCashOut += x)});
         
-        const totalCashInAndOut = countCashIn - countCashOut;
+        const totalCashInAndOut = (countCashIn - countCashOut).toFixed(2);
         console.log(totalCashInAndOut);
         return totalCashInAndOut;
     }

@@ -33,7 +33,7 @@ function addCashIn(body) {
 function addCashOut(body) {
   const config = getLocalToken();
   console.log(config);
-  const promise = axios.post(`${BASE_URL}/cash-in`, body, config);
+  const promise = axios.post(`${BASE_URL}/cash-out`, body, config);
   return promise;
 }
 

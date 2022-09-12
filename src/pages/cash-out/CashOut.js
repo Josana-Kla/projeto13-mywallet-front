@@ -4,7 +4,7 @@ import { addCashOut } from "../../services/api/axios";
 
 export default function CashOut() {
     const navigate = useNavigate();
-    const [ value, setValue ] = useState();
+    const [ value, setValue ] = useState("");
     const [ description, setDescription ] = useState("");
 
     function handleForm(event) {
