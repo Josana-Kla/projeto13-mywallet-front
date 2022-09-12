@@ -32,7 +32,6 @@ const TransactionsList = styled.div`
     height: 100%;
 
     p {
-        color: #868686;
         font-size: 20px;
         text-align: center;
         align-self: center;

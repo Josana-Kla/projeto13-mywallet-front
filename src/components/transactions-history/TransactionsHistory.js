@@ -1,6 +1,7 @@
-import { Transactions } from "./Style";
+import { EachTransaction, LineTransaction, Total, Transactions } from "./Style";
 
 export default function TransactionsHistory( { cashIn, cashOut } ) {
+
     function total() {
         const eachCashIn = cashIn.map((item) => Number(item.value)); 
         let countCashIn = 0;
@@ -16,27 +17,31 @@ export default function TransactionsHistory( { cashIn, cashOut } ) {
 
     return (
         <Transactions>
-            <div>
+            <EachTransaction>
                 {cashIn.map((item, index) => (
-                    <span key={index}>
+                    <LineTransaction key={index}>
                         <p>{item.date} </p>
                         <p>{item.description}</p>
-                        <p>{item.value}</p>
-                    </span>
+                        <p className="colorCashIn">{item.value}</p>
+                    </LineTransaction>
                 ))}
                 {cashOut.map((item, index) => (
-                    <span key={index}>
+                    <LineTransaction key={index}>
                         <p>{item.date} </p>
                         <p>{item.description}</p>
-                        <p>{item.value}</p>
-                    </span>
+                        <p className="colorCashOut">{item.value}</p>
+                    </LineTransaction>
                 ))}
-            </div>
+            </EachTransaction>
 
-            <span>
+            <Total>
                 <p>SALDO</p>
-                <p>{total()}</p>
-            </span>
+                {total() > 0 ? (
+                    <p className="colorCashIn">{total()}</p>
+                ) : (
+                    <p className="colorCashOut">{total()}</p>
+                )}
+            </Total>
         </Transactions>
     )
 }
