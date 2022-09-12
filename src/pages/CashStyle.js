@@ -24,6 +24,8 @@ const FormCash = styled.form`
         border-radius: 5px;
         border: none;
 
+        padding-left: 13px;
+
         height: 58px;
 
         color: #000000;
@@ -33,8 +35,6 @@ const FormCash = styled.form`
     input::placeholder {
         color: #000000;
         font-size: 20px;
-
-        padding-left: 13px;
     }
 
     button {

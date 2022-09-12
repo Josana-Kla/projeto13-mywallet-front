@@ -1,6 +1,6 @@
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { IoMdAddCircleOutline, IoMdRemoveCircleOutline } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getHistory } from "../../services/api/axios";
 import TransactionsHistory from "../../components/transactions-history/TransactionsHistory";
@@ -10,6 +10,8 @@ export default function Home() {
     const [ user, setUser ] = useState("");
     const [ cashIn, setCashIn ] = useState([]);
     const [ cashOut, setCashOut ] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getHistory()
@@ -28,7 +30,12 @@ export default function Home() {
         <Main>
             <WelcomeUser>
                 <h1>Olá, {user}</h1>
-                <RiLogoutBoxRLine size="24px" />
+                <div onClick={() => {
+                    localStorage.clear("mywallet");
+                    navigate('/')
+                }}>
+                    <RiLogoutBoxRLine size="24px"  />
+                </div>
             </WelcomeUser>
 
             <TransactionsList>

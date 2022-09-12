@@ -12,7 +12,7 @@ export default function SignIn() {
     const [ password, setPassword ] = useState("");
     const [ loading, setLoading ] = useState(false);
 
-    const { /* authenticated, setUser,  */login } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
     function handleForm(event) {
         event.preventDefault();
