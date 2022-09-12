@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getHistory } from "../../services/api/axios";
 
 export default function Home() {
-    //TODO: Se a quantidade de coisas dentro de histórico maior que 0
+    //TODO: Se a quantidade de coisas dentro de histórico maior que 0 - passar a funcao get para aqui de transacoes e mandar via props
     return (
         <div>
             <span>
@@ -49,6 +49,20 @@ function TransactionsHistory() {
         .catch(() => console.log("error"));
     }, []);
 
+    function total() {
+        const eachCashIn = cashIn.map((item) => Number(item.value)); 
+        let countCashIn = 0;
+        eachCashIn.forEach((x) => { console.log( countCashIn += x)});
+
+        const eachCashOut = cashOut.map((item) => Number(item.value)); 
+        let countCashOut = 0;
+        eachCashOut.forEach((x) => { console.log( countCashOut += x)});
+        
+        const totalCashInAndOut = countCashIn - countCashOut;
+        console.log(totalCashInAndOut);
+        return totalCashInAndOut;
+    }
+
     return (
         <div>
             <div>
@@ -70,7 +84,7 @@ function TransactionsHistory() {
 
             <span>
                 <p>SALDO</p>
-                <p>289,00</p>
+                <p>{total()}</p>
             </span>
         </div>
     )
